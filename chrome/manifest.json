@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Music Search",
+  "description": "This extension will let you find a song by simply searching in the chrome omnibar",
+  "version": "1.0",
+  "omnibox": {"keyword" : "music"},
+  "icons": {
+   "16": "logo/16logo.png"
+  },
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html"
+  },
+  "background": {
+   "persistent": false,
+   "scripts": ["lib/jquery220.min.js","background.js"]
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
