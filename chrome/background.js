@@ -50,7 +50,6 @@ function google_sign_in(user, pwd){
     //     }
     // });
 }
-
 function get_google_songs() {
     $.get(server+'/gmusic', function(data){
         if (data === 'not_signed_in'){

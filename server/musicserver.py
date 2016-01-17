@@ -17,7 +17,7 @@ def gmusic():
     '''
     library = utils.all_songs()
     if library:
-        return json.dump(library)
+        return json.dumps(library)
     else:
         return 'not_signed_in'
 
@@ -30,7 +30,7 @@ def search():
     query = request.args.get('query')
     urls = utils.find_url(query)
     if urls:
-        return json.dump(urls)
+        return json.dumps(urls)
     else:
         return 'not_signed_in'
 # TODO this could be configed to properly run, currently unnecessary
@@ -44,7 +44,10 @@ def search():
 def signin():
     user = request.form['username']
     pwd = request.form['password']
-    return json.dump(utils.login(user, pwd))
+    if utils.login(user, pwd):
+        return 'success'
+    else:
+        return 'failed'
 
 
 
