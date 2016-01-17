@@ -6,7 +6,9 @@ def login_factory():
     data = {}
     def login(user, pwd):
         mcw = MobileClientWrapper()
+        print 'lit'
         logged_in = mcw.login(user, pwd)
+        print 'lit2'
         if logged_in:
             data['client'] = mcw
         return logged_in
@@ -27,6 +29,10 @@ def search_all_filters(query):
     from gmusicapi_wrapper import utils
     # return [(field, query) for field in utils._get_valid_filter_fields().items()]
     return [('title', query)]
+def all_songs():
+    user = current_user()
+    if user:
+        return user.api.get_all_songs()
 def find_url(query, num_results=5):
     '''
     Returns a dictionary mapping a song to the url, artist, and album
@@ -35,7 +41,7 @@ def find_url(query, num_results=5):
     However it's important to note that trying to request more than 100 will
     result in google servers throwing a 403  forbidden access error
     '''
-    
+
     if num_results > 100:
         print "Can't return more than 100 results, reducing to 100"
         num_results = 100

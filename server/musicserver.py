@@ -10,6 +10,17 @@ api = Mobileclient()
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+@app.route('/gmusic')
+def gmusic():
+    '''
+    Returns all songs in google music. Used to make a better search
+    '''
+    library = utils.all_songs()
+    if library:
+        return json.dump(library)
+    else:
+        return 'not_signed_in'
+
 @app.route('/search')
 def search():
     '''
@@ -29,21 +40,12 @@ def search():
 #     api.perform_oauth()
 #     return 'sucesss'
 
-@app.route('/signin', methods=['GET'])
-@cross_origin()
+@app.route('/sign_in', methods=['POST'])
 def signin():
-    user = request.args.get('username')
-    pwd = request.args.get('password')
-    try:
-        logged_in = api.login(user, pwd, Mobileclient.FROM_MAC_ADDRESS)
-    except AlreadyLoggedIn:
-        logged_in = True
+    user = request.form['username']
+    pwd = request.form['password']
+    return json.dump(utils.login(user, pwd))
 
-
-    if logged_in:
-        return 'success'
-    else:
-        return 'failed'
 
 
 if __name__ == '__main__':
