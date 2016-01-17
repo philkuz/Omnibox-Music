@@ -21,6 +21,7 @@ chrome.omnibox.onInputChanged.addListener(
     //   {content: text + " number two", description: "the second entry"}
     // ]);
   });
+function search()
 function song_formatter(title, artist){
     return title + ' by ' + artist;
 }

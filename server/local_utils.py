@@ -35,10 +35,7 @@ def find_url(query, num_results=5):
     However it's important to note that trying to request more than 100 will
     result in google servers throwing a 403  forbidden access error
     '''
-    user = 'superpker@gmail.com'
-    pwd = 'slim.Negus$1'
-
-    login(user,pwd)
+    
     if num_results > 100:
         print "Can't return more than 100 results, reducing to 100"
         num_results = 100
