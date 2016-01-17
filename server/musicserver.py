@@ -2,7 +2,8 @@ from flask import Flask, request
 from flask.ext.cors import CORS, cross_origin
 from gmusicapi import Mobileclient, Musicmanager
 from gmusicapi.exceptions import AlreadyLoggedIn
-
+import local_utils as utils
+import json
 app = Flask(__name__)
 api = Mobileclient()
 # api = Musicmanager()
@@ -11,9 +12,16 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/search')
 def search():
-    query = request.args.get('query')
+    '''
+    the route to make search requests. Pass in query as an argument
+    '''
 
-    return 'Hello world'
+    query = request.args.get('query')
+    urls = utils.find_url(query)
+    if urls:
+        return json.dump(urls)
+    else:
+        return 'not_signed_in'
 # TODO this could be configed to properly run, currently unnecessary
 
 # @app.route('/signin',methods=['GET'])
